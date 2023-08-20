@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBService", "DBService\DBSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbService.Tests", "DbService.Tests\DbService.Tests.csproj", "{88D43E3F-92FE-422C-A7FA-CE8D817B4361}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnectionFactory", "DbConnectionFactory\DbConnectionFactory.csproj", "{8F66BB68-C508-4BDE-9C21-C17ACAE19453}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
