@@ -10,13 +10,26 @@ namespace DbService.Tests
         IDbService<TestModel> _dbService;
         string _testQuery = "test-query";
         object[] _parm;
+        TestModel person1;
+        TestModel person2;
 
         public DbServiceTests()
         {
             _mockQueryService = new();
             _dbService = new DbService<TestModel>(_mockQueryService.Object);
-            var person = new TestModel();
-            _parm = new object[] {person};
+            person1 = new TestModel()
+            {
+                FirstName = "TestFirstName",
+                LastName = "TestLastName",
+                DateOfBirth = DateTime.Parse("1957-02-06")
+            };
+            person2 = new TestModel()
+            {
+                FirstName = "SecondTestFirstName",
+                LastName = "SecondTestLastName",
+                DateOfBirth = DateTime.Parse("1987-08-20")
+            };
+            _parm = new object[] {person1};
         }
 
         [Fact]
@@ -94,11 +107,7 @@ namespace DbService.Tests
         [Fact]
         public async void TestListAsync()
         {
-            var expected = new List<TestModel>
-            {
-                new TestModel() {FirstName = "TestFirstName", LastName = "TestLastName"},
-                new TestModel(){FirstName = "SecondTestFirstName", LastName = "SecondTestLastName"}
-            };
+            var expected = new List<TestModel> {person1, person2};
             _mockQueryService.Setup(
                 s => s.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
                 .ReturnsAsync(expected);
@@ -121,12 +130,11 @@ namespace DbService.Tests
         [Fact]
         public async void TestGetAsync()
         {
-            var expected = new TestModel() {FirstName = "TestFirstName", LastName = "TestLastName"};
             _mockQueryService.Setup(
                 s => s.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
-                .ReturnsAsync(expected);
+                .ReturnsAsync(person1);
             var result = await _dbService.GetAsync(_testQuery, _parm);
-            Assert.Equal(expected, result);
+            Assert.Equal(person1, result);
             _mockQueryService.Verify(s => s.QuerySingleAsync<TestModel>(_testQuery, _parm), Times.Once);
         }
 
