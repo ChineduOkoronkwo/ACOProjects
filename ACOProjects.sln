@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbService.Tests", "DbServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnectionFactory", "DbConnectionFactory\DbConnectionFactory.csproj", "{8F66BB68-C508-4BDE-9C21-C17ACAE19453}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService", "DataService\DataService.csproj", "{3EC8292A-E90C-4654-B4B1-A39AD3B983FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService.Tests", "DataService.Tests\DataService.Tests.csproj", "{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EC8292A-E90C-4654-B4B1-A39AD3B983FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC8292A-E90C-4654-B4B1-A39AD3B983FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC8292A-E90C-4654-B4B1-A39AD3B983FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC8292A-E90C-4654-B4B1-A39AD3B983FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
