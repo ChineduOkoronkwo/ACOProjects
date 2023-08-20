@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DBService;
 using DBService.interfaces;
 using Moq;
-using Xunit;
 
 namespace DbService.Tests
 {
@@ -15,6 +10,7 @@ namespace DbService.Tests
         IDbService<TestModel> _dbService;
         string _testQuery = "test-query";
         object[] _parm;
+
         public DbServiceTests()
         {
             _mockQueryService = new();
@@ -24,7 +20,7 @@ namespace DbService.Tests
         }
 
         [Fact]
-        public async void TestExecuteAsync()
+        public async void TestCreateAsync()
         {
             var expected = 1;
             _mockQueryService.Setup(
@@ -37,13 +33,64 @@ namespace DbService.Tests
         }
 
         [Fact]
-        public async void TestExecuteAsyncException() {
+        public async void TestCreateAsyncException()
+        {
             _mockQueryService.Setup(
                 s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
                 .ThrowsAsync(new Exception("Test exception"));
             await Assert.ThrowsAsync<Exception>(
                 async () => await _dbService.CreateAsync(_testQuery, _parm));
             _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestListAsync()
+        {
+            var expected = new List<TestModel>
+            {
+                new TestModel() {FirstName = "TestFirstName", LastName = "TestLastName"},
+                new TestModel(){FirstName = "SecondTestFirstName", LastName = "SecondTestLastName"}
+            };
+            _mockQueryService.Setup(
+                s => s.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
+                .ReturnsAsync(expected);
+            var result = await _dbService.ListAsync(_testQuery, _parm);
+            Assert.Equal(expected, result);
+            _mockQueryService.Verify(s => s.QueryAsync<TestModel>(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestListAsyncException()
+        {
+             _mockQueryService.Setup(
+                s => s.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
+                .ThrowsAsync(new Exception("Test exception"));
+            await Assert.ThrowsAsync<Exception>(
+                async () => await _dbService.ListAsync(_testQuery, _parm));
+            _mockQueryService.Verify(s => s.QueryAsync<TestModel>(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestGetAsync()
+        {
+            var expected = new TestModel() {FirstName = "TestFirstName", LastName = "TestLastName"};
+            _mockQueryService.Setup(
+                s => s.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
+                .ReturnsAsync(expected);
+            var result = await _dbService.GetAsync(_testQuery, _parm);
+            Assert.Equal(expected, result);
+            _mockQueryService.Verify(s => s.QuerySingleAsync<TestModel>(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestGetAsyncException()
+        {
+            _mockQueryService.Setup(
+                s => s.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
+                .ThrowsAsync(new Exception("Test exception"));
+            await Assert.ThrowsAsync<Exception>(
+                async () => await _dbService.GetAsync(_testQuery, _parm));
+            _mockQueryService.Verify(s => s.QuerySingleAsync<TestModel>(_testQuery, _parm), Times.Once);
         }
     }
 
