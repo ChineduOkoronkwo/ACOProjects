@@ -44,6 +44,54 @@ namespace DbService.Tests
         }
 
         [Fact]
+        public async void TestUpdateAsync()
+        {
+            var expected = 1;
+            _mockQueryService.Setup(
+                s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
+                .ReturnsAsync(expected);
+            var result = await _dbService.UpdateAsync(_testQuery, _parm);
+
+            Assert.Equal(expected, result);
+            _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestUpdateAsyncException()
+        {
+            _mockQueryService.Setup(
+                s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
+                .ThrowsAsync(new Exception("Test exception"));
+            await Assert.ThrowsAsync<Exception>(
+                async () => await _dbService.UpdateAsync(_testQuery, _parm));
+            _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestDeleteAsync()
+        {
+            var expected = 1;
+            _mockQueryService.Setup(
+                s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
+                .ReturnsAsync(expected);
+            var result = await _dbService.DeleteAsync(_testQuery, _parm);
+
+            Assert.Equal(expected, result);
+            _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void TestDeleteAsyncException()
+        {
+            _mockQueryService.Setup(
+                s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
+                .ThrowsAsync(new Exception("Test exception"));
+            await Assert.ThrowsAsync<Exception>(
+                async () => await _dbService.DeleteAsync(_testQuery, _parm));
+            _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
         public async void TestListAsync()
         {
             var expected = new List<TestModel>
