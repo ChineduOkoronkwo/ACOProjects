@@ -7,51 +7,52 @@ namespace DataService.Tests.Services.Tests
 {
     public class DbServiceTests
     {
-        Mock<IQueryService> _mockQueryService;
-        IDbService _dbService;
+        private const string _testQuery = "test-query";
+        private const string _testExceptionMessage = "Test exception";
 
-        string _testQuery = "test-query";
-        object[] _parm;
-        TestModel person1;
-        TestModel person2;
+        private readonly Mock<IQueryService> _mockQueryService;
+        private readonly IDbService _dbService;
+        private readonly object[] _parm;
+        private readonly TestModel _person1;
+        private readonly TestModel _person2;
 
         public DbServiceTests()
         {
             _mockQueryService = new();
             _dbService = new DbService(_mockQueryService.Object);
 
-            person1 = new TestModel()
+            _person1 = new TestModel()
             {
                 FirstName = "TestFirstName",
                 LastName = "TestLastName",
                 DateOfBirth = DateTime.Parse("1957-02-06")
             };
-            person2 = new TestModel()
+            _person2 = new TestModel()
             {
                 FirstName = "SecondTestFirstName",
                 LastName = "SecondTestLastName",
                 DateOfBirth = DateTime.Parse("1987-08-20")
             };
-            _parm = new object[] {person1};
+            _parm = new object[] { _person1 };
         }
 
         [Fact]
-        public async void GetAsync_ReturnsSngleRecord_WithValidParamAndQuery()
+        public async void GetAsync_ReturnsSingleRecord_From_QuerySingleAsync()
         {
             _mockQueryService.Setup(
                 s => s.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
-                .ReturnsAsync(person1);
+                .ReturnsAsync(_person1);
             var result = await _dbService.GetAsync<TestModel>(_testQuery, _parm);
-            Assert.Equal(person1, result);
+            Assert.Equal(_person1, result);
             _mockQueryService.Verify(s => s.QuerySingleAsync<TestModel>(_testQuery, _parm), Times.Once);
         }
 
         [Fact]
-        public async void GetAsync_ThrowsExcepton_WithInValidQuery()
+        public async void GetAsync_Propagates_Exception_FROM_QuerySingleAsync()
         {
             _mockQueryService.Setup(
                 s => s.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
-                .ThrowsAsync(new Exception("Test exception"));
+                .ThrowsAsync(new Exception(_testExceptionMessage));
             await Assert.ThrowsAsync<Exception>(
                 async () => await _dbService.GetAsync<TestModel>(_testQuery, _parm)
             );
@@ -61,9 +62,9 @@ namespace DataService.Tests.Services.Tests
         }
 
         [Fact]
-        public async void ListAsync_ReturnsRecords_WithValidParamAndQuery()
+        public async void ListAsync_ReturnsTwoRecords_From_QueryAsync()
         {
-            var expected = new List<TestModel> {person1, person2};
+            var expected = new List<TestModel> {_person1, _person2};
             _mockQueryService.Setup(
                 s => s.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
                 .ReturnsAsync(expected);
@@ -75,11 +76,11 @@ namespace DataService.Tests.Services.Tests
         }
 
         [Fact]
-        public async void ListAsync_ThrowsExcepton_WithInValidParam()
+        public async void ListAsync_Propagates_Excepton_From_QueryAsync()
         {
             _mockQueryService.Setup(
                 s => s.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
-                .ThrowsAsync(new Exception("Test exception"));
+                .ThrowsAsync(new Exception(_testExceptionMessage));
             await Assert.ThrowsAsync<Exception>(
                 async () => await _dbService.ListAsync<TestModel>(_testQuery, _parm));
             _mockQueryService.Verify(s => s.QueryAsync<TestModel>(_testQuery, _parm), Times.Once);
