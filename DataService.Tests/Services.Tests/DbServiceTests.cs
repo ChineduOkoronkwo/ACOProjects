@@ -107,6 +107,28 @@ namespace DataService.Tests.Services.Tests
                 async () => await _dbService.CreateAsync(_testQuery, _parm));
             _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
         }
+
+        [Fact]
+        public async void UpdateAsync_Returns_One_From_ExecuteAsync()
+        {
+            _mockQueryService.Setup(
+                s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
+                .ReturnsAsync(1);
+            var result = await _dbService.UpdateAsync(_testQuery, _parm);
+            Assert.Equal(1, result);
+            _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
+
+        [Fact]
+        public async void UpdateAsync_Propagates_Exception_From_ExecuteAsync()
+        {
+            _mockQueryService.Setup(
+                s => s.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>()))
+                .ThrowsAsync(new Exception(_testExceptionMessage));
+            await Assert.ThrowsAsync<Exception>(
+                async () => await _dbService.UpdateAsync(_testQuery, _parm));
+            _mockQueryService.Verify(s => s.ExecuteAsync(_testQuery, _parm), Times.Once);
+        }
     }
 
     public class TestModel
