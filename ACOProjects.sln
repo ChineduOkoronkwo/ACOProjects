@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBService", "DBService\DBService.csproj", "{FAF55C4A-8838-42BB-9C0B-9D1EE55096BB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbService.Tests", "DbService.Tests\DbService.Tests.csproj", "{88D43E3F-92FE-422C-A7FA-CE8D817B4361}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnectionFactory", "DbConnectionFactory\DbConnectionFactory.csproj", "{8F66BB68-C508-4BDE-9C21-C17ACAE19453}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService", "DataService\DataService.csproj", "{3EC8292A-E90C-4654-B4B1-A39AD3B983FD}"
@@ -22,14 +18,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FAF55C4A-8838-42BB-9C0B-9D1EE55096BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAF55C4A-8838-42BB-9C0B-9D1EE55096BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAF55C4A-8838-42BB-9C0B-9D1EE55096BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAF55C4A-8838-42BB-9C0B-9D1EE55096BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88D43E3F-92FE-422C-A7FA-CE8D817B4361}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F66BB68-C508-4BDE-9C21-C17ACAE19453}.Release|Any CPU.ActiveCfg = Release|Any CPU
