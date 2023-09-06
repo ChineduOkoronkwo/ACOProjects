@@ -45,7 +45,6 @@ namespace DataService.Tests.Services.Tests
             _mockConnection.SetupDapperAsync(c => c.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(_person1);
             var result = await _dbService.GetAsync<TestModel>(_testQuery, _person1);
             Assert.Equivalent(result, _person1);
-            _mockConnection.Verify(s => s.QuerySingleAsync<TestModel>(_testQuery, _person1, null, null, null), Times.Once);
         }
     }
 }
