@@ -64,7 +64,7 @@ namespace DataService.Tests.Services.Tests
         [Fact]
         public async void ListAsync_ReturnsTwoRecords_From_QueryAsync()
         {
-            var expected = new List<TestModel> {_person1, _person2};
+            var expected = new List<TestModel> { _person1, _person2 };
             _mockQueryService.Setup(
                 s => s.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>()))
                 .ReturnsAsync(expected);
