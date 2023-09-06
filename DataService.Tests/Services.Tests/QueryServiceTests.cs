@@ -38,12 +38,12 @@ namespace DataService.Tests.Services.Tests
         public async void QuerySingleAsync_Returns_SingleRecord_With_Parm()
         {
             _mockConnection.SetupDapperAsync(c => c.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(_person1);
-            var result = await _queryService.QuerySingleAsync<TestModel>(_testSql, _person1);
+            var result = await _queryService.QuerySingleAsync<TestModel>(_testSql, new object());
             Assert.Equivalent(result, _person1);
         }
 
         [Fact]
-        public async void QuerySingleAsync_Returns_SingleRecord_With_Null_Param()
+        public async void QuerySingleAsync_Returns_SingleRecord_Without_Param()
         {
             _mockConnection.SetupDapperAsync(c => c.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(_person1);
             var result = await _queryService.QuerySingleAsync<TestModel>(_testSql, null);
@@ -60,12 +60,28 @@ namespace DataService.Tests.Services.Tests
         }
 
         [Fact]
-        public async void QueryAsync_Returns_ListOfRecords_With_Null_Param()
+        public async void QueryAsync_Returns_ListOfRecords_Without_Param()
         {
             var expected = new List<TestModel> { _person1, _person2 };
             _mockConnection.SetupDapperAsync(c => c.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(expected);
             var result = await _queryService.QueryAsync<TestModel>(_testSql, null);
             Assert.Equivalent(result, expected);
+        }
+
+        [Fact]
+        public async void ExecuteAsync_Succeeds_With_Parm()
+        {
+            _mockConnection.SetupDapperAsync(c => c.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(1);
+            var result = await _queryService.ExecuteAsync(_testSql, new object());
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public async void ExecuteAsync_Succeeds_Without_Parm()
+        {
+            _mockConnection.SetupDapperAsync(c => c.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(2);
+            var result = await _queryService.ExecuteAsync(_testSql, null);
+            Assert.Equal(2, result);
         }
     }
 }
