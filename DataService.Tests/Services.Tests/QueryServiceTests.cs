@@ -51,6 +51,14 @@ namespace DataService.Tests.Services.Tests
         }
 
         [Fact]
+        public void QuerySingleAsync_Propagates_Exception()
+        {
+            _mockConnection.SetupDapperAsync(c => c.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).Throws(new Exception(_testExceptionMessage));
+            var result = async ()=> await _queryService.QuerySingleAsync<TestModel>(_testSql, null);
+            _= Assert.ThrowsAnyAsync<Exception>(result);
+        }
+
+        [Fact]
         public async void QueryAsync_Returns_ListOfRecords_With_Param()
         {
             var expected = new List<TestModel> { _person1, _person2 };
@@ -69,6 +77,14 @@ namespace DataService.Tests.Services.Tests
         }
 
         [Fact]
+        public void QueryAsync_Propagates_Exception()
+        {
+            _mockConnection.SetupDapperAsync(c => c.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).Throws(new Exception(_testExceptionMessage));
+            var result = async ()=> await _queryService.QueryAsync<TestModel>(_testSql, null);
+            _= Assert.ThrowsAnyAsync<Exception>(result);
+        }
+
+        [Fact]
         public async void ExecuteAsync_Succeeds_With_Parm()
         {
             _mockConnection.SetupDapperAsync(c => c.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(1);
@@ -82,6 +98,15 @@ namespace DataService.Tests.Services.Tests
             _mockConnection.SetupDapperAsync(c => c.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).ReturnsAsync(2);
             var result = await _queryService.ExecuteAsync(_testSql, null);
             Assert.Equal(2, result);
+        }
+
+
+        [Fact]
+        public void ExecuteAsync_Propagates_Exception()
+        {
+            _mockConnection.SetupDapperAsync(c => c.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).Throws(new Exception(_testExceptionMessage));
+            var result = async ()=> await _queryService.ExecuteAsync(_testSql, null);
+            _= Assert.ThrowsAnyAsync<Exception>(result);
         }
     }
 }
