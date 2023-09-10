@@ -1,7 +1,6 @@
 using System.Data;
 using Dapper;
 using DataService.Interfaces;
-using DbConnectionFactory.Interfaces;
 
 namespace DataService.Services
 {
@@ -9,11 +8,6 @@ namespace DataService.Services
     {
 
         private readonly IDbConnection _dbConnection;
-
-        public QueryService(IDbConnectionFactory dbConnectionFactory, string connectionString)
-        {
-            _dbConnection = dbConnectionFactory.GetDbConnection(connectionString);
-        }
 
         public QueryService(IDbConnection dbConnection)
         {
