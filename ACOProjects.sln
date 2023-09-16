@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService", "DataService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService.Tests", "DataService.Tests\DataService.Tests.csproj", "{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbServiceAcceptanceTest", "DbServiceAcceptanceTest\DbServiceAcceptanceTest.csproj", "{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F3A10AB-C1CD-4AE1-8DCD-3518540E394F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
