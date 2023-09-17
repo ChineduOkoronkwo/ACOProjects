@@ -1,5 +1,12 @@
-// {
-//     "editor.wordWrap": "wordWrapColumn",
-//     "editor.wrappingIndent": "deepIndent",
-//     "editor.wordWrapColumn": 80
-// }
+{
+    "cucumberautocomplete.steps": [
+        "*/Steps/*.cs"
+    ],
+    "cucumberautocomplete.syncfeatures": "Features/*.feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "editor.quickSuggestions": {
+        "comments": false,
+        "strings": true,
+        "other": true
+    },
+}
