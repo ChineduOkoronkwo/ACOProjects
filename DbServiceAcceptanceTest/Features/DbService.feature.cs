@@ -132,19 +132,18 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Use GetAsync to fetch a brand")]
-        [NUnit.Framework.TestCaseAttribute("SELECT * FROM product_brands WHERE id = @id;", "75f5b5b2-3776-43be-961d-648760142b09", "Addidas", null)]
-        [NUnit.Framework.TestCaseAttribute("SELECT * FROM product_brands WHERE id = @id;", "559811ea-bf26-466c-b23c-f2bfc17f6b33", "Apple", null)]
-        [NUnit.Framework.TestCaseAttribute("SELECT * FROM product_brands WHERE id = @id;", "f31164a1-dd18-4c2c-89e4-bbc824471576", "Google", null)]
-        [NUnit.Framework.TestCaseAttribute("SELECT * FROM product_brands WHERE id = @id;", "a00a8ef8-28b9-49f3-b056-fe330ce4aac6", "Instant Pot", null)]
-        public void UseGetAsyncToFetchABrand(string sqlCommand, string id, string name, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Use GetAsync to fetch a ProductBrand")]
+        [NUnit.Framework.TestCaseAttribute("75f5b5b2-3776-43be-961d-648760142b09", "Addidas", null)]
+        [NUnit.Framework.TestCaseAttribute("559811ea-bf26-466c-b23c-f2bfc17f6b33", "Apple", null)]
+        [NUnit.Framework.TestCaseAttribute("f31164a1-dd18-4c2c-89e4-bbc824471576", "Google", null)]
+        [NUnit.Framework.TestCaseAttribute("a00a8ef8-28b9-49f3-b056-fe330ce4aac6", "Instant Pot", null)]
+        public void UseGetAsyncToFetchAProductBrand(string id, string name, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("sqlCommand", sqlCommand);
             argumentsOfScenario.Add("id", id);
             argumentsOfScenario.Add("name", name);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use GetAsync to fetch a brand", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use GetAsync to fetch a ProductBrand", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -159,9 +158,46 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 21
-    testRunner.When(string.Format("I call GetAsync with the {0} and {1}", sqlCommand, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When(string.Format("I call GetAsync with the {0}", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 22
+    testRunner.Then(string.Format("the ProductBrand should have {0} and {1}", id, name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Use UpdateAsync to update ProductBrand")]
+        [NUnit.Framework.TestCaseAttribute("75f5b5b2-3776-43be-961d-648760142b09", "Pollo", null)]
+        [NUnit.Framework.TestCaseAttribute("559811ea-bf26-466c-b23c-f2bfc17f6b33", "Swiss Challet", null)]
+        public void UseUpdateAsyncToUpdateProductBrand(string id, string name, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("id", id);
+            argumentsOfScenario.Add("name", name);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use UpdateAsync to update ProductBrand", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 31
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line hidden
+#line 32
+    testRunner.When(string.Format("I call UpdateAsync with the {0} and {1}", id, name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 33
+    testRunner.When(string.Format("I call GetAsync with the {0}", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 34
     testRunner.Then(string.Format("the ProductBrand should have {0} and {1}", id, name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

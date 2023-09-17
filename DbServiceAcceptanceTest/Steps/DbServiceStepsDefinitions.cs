@@ -29,7 +29,7 @@ namespace DbServiceAcceptanceTest.Steps
         public async Task GivenTheProductBrand(Table table)
         {
             var sqlCommand = "INSERT INTO product_brands(id, name) Values(@id, @name)";
-            var productBrands = GetProductBrands(table);
+            var productBrands = GetProductBrandsFromSpecFlowTable(table);
             foreach (var brand in productBrands)
             {
                 var result = await _dbService.CreateAsync(sqlCommand, brand);
@@ -37,7 +37,7 @@ namespace DbServiceAcceptanceTest.Steps
             }
 
             table.RowCount.Should().Be(4);
-            _scenarioContext["ProductBrand"] = table;
+            _scenarioContext["ProductBrandsTable"] = table;
         }
 
         [When("I call ListAsync on ProductBrand with (.*)")]
@@ -47,19 +47,29 @@ namespace DbServiceAcceptanceTest.Steps
             _scenarioContext["ListAsyncResult"] = result;
         }
 
-        [When("I call GetAsync with the (.*) and (.*)")]
-        public async Task WhenICallGetAsync(string sqlCommand, string id)
+        [When("I call GetAsync with the (.*)")]
+        public async Task WhenICallGetAsync(string id)
         {
-            var getAsyncParam = new ProductBrandGetAsyncParamDto { Id = Guid.Parse(id) };
+            var getAsyncParam = new BaseEntity { Id = Guid.Parse(id) };
+            var sqlCommand = "SELECT * FROM product_brands WHERE id = @id;";
             var result = await _dbService.GetAsync<ProductBrand>(sqlCommand, getAsyncParam);
             _scenarioContext["GetAsyncResult"] = result;
+        }
+
+        [When("I call UpdateAsync with the (.*) and (.*)")]
+        public async Task WhenICallUpdateAsync(string id, string name)
+        {
+            var productBrand = GetProductBrand(id, name);
+            var sqlCommand = "Update product_brands SET name = @name WHERE id = @id;";
+            var result = await _dbService.UpdateAsync(sqlCommand, productBrand);
+            result.Should().Be(1);
         }
 
         [Then("the ProductBrand details should match what was created")]
         public void ThenFourProductBrands()
         {
             var actualProductBrands = (IEnumerable<ProductBrand>)_scenarioContext["ListAsyncResult"];
-            var expectedProductBrands = GetProductBrands((Table)_scenarioContext["ProductBrand"]);
+            var expectedProductBrands = GetProductBrandsFromSpecFlowTable((Table)_scenarioContext["ProductBrandsTable"]);
             actualProductBrands.Should().BeEquivalentTo(expectedProductBrands);
         }
 
@@ -88,19 +98,20 @@ namespace DbServiceAcceptanceTest.Steps
             await _queryService.ExecuteAsync("TRUNCATE TABLE product_brands", null);
         }
 
-        private IEnumerable<ProductBrand> GetProductBrands(Table table)
+        private IEnumerable<ProductBrand> GetProductBrandsFromSpecFlowTable(Table table)
         {
             var productBrands = new List<ProductBrand>();
             foreach (var row in table.Rows)
             {
-                productBrands.Add(new ProductBrand
-                    {
-                        Id = Guid.Parse(row["id"]),
-                        Name = row["name"],
-                    });
+                productBrands.Add(GetProductBrand(row["id"], row["name"]));
             }
 
             return productBrands;
+        }
+
+        private ProductBrand GetProductBrand(string id, string name)
+        {
+            return new ProductBrand { Id = Guid.Parse(id), Name = name };
         }
     }
 }
