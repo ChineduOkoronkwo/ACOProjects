@@ -40,9 +40,10 @@ namespace DbServiceAcceptanceTest.Steps
             _scenarioContext["ProductBrandsTable"] = table;
         }
 
-        [When("I call ListAsync on ProductBrand with (.*)")]
-        public async Task WhenICallListAsyncToFetchAllBrand(string sqlCommand)
+        [When("I call ListAsync to fetch all ProductBrands")]
+        public async Task WhenICallListAsyncToFetchAllBrand()
         {
+            var sqlCommand = "SELECT * FROM product_brands;";
             var result = await _dbService.ListAsync<ProductBrand>(sqlCommand, null);
             _scenarioContext["ListAsyncResult"] = result;
         }
@@ -65,6 +66,15 @@ namespace DbServiceAcceptanceTest.Steps
             result.Should().Be(1);
         }
 
+        [When("I call DeleteAsync with the (.*)")]
+        public async Task WhenICallDeleteAsync(string id)
+        {
+            var param = new BaseEntity { Id = Guid.Parse(id) };
+            var sqlCommand = "DELETE FROM product_brands WHERE id = @id;";
+            var result = await _dbService.DeleteAsync(sqlCommand, param);
+            result.Should().Be(1);
+        }
+
         [Then("the ProductBrand details should match what was created")]
         public void ThenFourProductBrands()
         {
@@ -79,6 +89,17 @@ namespace DbServiceAcceptanceTest.Steps
             var productBrand = (ProductBrand)_scenarioContext["GetAsyncResult"];
             id.Should().Be(productBrand.Id.ToString());
             name.Should().Be(productBrand.Name);
+        }
+
+        [Then("no ProductBrand should have the (.*) or (.*)")]
+        public void TheGetAsyncResultShouldHaveNoResult(string id, string name)
+        {
+            var actualProductBrands = (IEnumerable<ProductBrand>)_scenarioContext["ListAsyncResult"];
+            foreach (var brand in actualProductBrands)
+            {
+                brand.Id.Should().NotBe(Guid.Parse(id));
+                brand.Name.Should().NotBe(name);
+            }
         }
 
         [BeforeScenario]
