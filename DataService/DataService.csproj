@@ -1,13 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
-    <PackageReference Include="dapper" Version="2.0.151" />
+    <PackageReference Include="dapper" Version="2.0.151"/>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118"/>
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 </Project>

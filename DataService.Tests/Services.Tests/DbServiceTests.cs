@@ -18,7 +18,7 @@ namespace DataService.Tests.Services.Tests
 
         public DbServiceTests()
         {
-            _mockQueryService = new();
+            _mockQueryService = new ();
             _dbService = new DbService(_mockQueryService.Object);
 
             _person1 = new TestModel()

@@ -18,7 +18,7 @@ namespace DataService.Tests.Services.Tests
 
         public QueryServiceTests()
         {
-            _mockConnection = new();
+            _mockConnection = new ();
             _queryService = new QueryService(_mockConnection.Object);
             _person1 = new TestModel()
             {
@@ -54,8 +54,8 @@ namespace DataService.Tests.Services.Tests
         public void QuerySingleAsync_Propagates_Exception()
         {
             _mockConnection.SetupDapperAsync(c => c.QuerySingleAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).Throws(new Exception(_testExceptionMessage));
-            var result = async ()=> await _queryService.QuerySingleAsync<TestModel>(_testSql, null);
-            _= Assert.ThrowsAnyAsync<Exception>(result);
+            var result = async () => await _queryService.QuerySingleAsync<TestModel>(_testSql, null);
+            _ = Assert.ThrowsAnyAsync<Exception>(result);
         }
 
         [Fact]
@@ -80,8 +80,8 @@ namespace DataService.Tests.Services.Tests
         public void QueryAsync_Propagates_Exception()
         {
             _mockConnection.SetupDapperAsync(c => c.QueryAsync<TestModel>(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).Throws(new Exception(_testExceptionMessage));
-            var result = async ()=> await _queryService.QueryAsync<TestModel>(_testSql, null);
-            _= Assert.ThrowsAnyAsync<Exception>(result);
+            var result = async () => await _queryService.QueryAsync<TestModel>(_testSql, null);
+            _ = Assert.ThrowsAnyAsync<Exception>(result);
         }
 
         [Fact]
@@ -100,13 +100,12 @@ namespace DataService.Tests.Services.Tests
             Assert.Equal(2, result);
         }
 
-
         [Fact]
         public void ExecuteAsync_Propagates_Exception()
         {
             _mockConnection.SetupDapperAsync(c => c.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), null, null, null)).Throws(new Exception(_testExceptionMessage));
-            var result = async ()=> await _queryService.ExecuteAsync(_testSql, null);
-            _= Assert.ThrowsAnyAsync<Exception>(result);
+            var result = async () => await _queryService.ExecuteAsync(_testSql, null);
+            _ = Assert.ThrowsAnyAsync<Exception>(result);
         }
     }
 }

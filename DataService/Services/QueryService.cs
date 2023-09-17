@@ -6,7 +6,6 @@ namespace DataService.Services
 {
     public class QueryService : IQueryService
     {
-
         private readonly IDbConnection _dbConnection;
 
         public QueryService(IDbConnection dbConnection)

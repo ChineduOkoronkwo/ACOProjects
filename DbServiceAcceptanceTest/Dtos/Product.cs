@@ -8,7 +8,7 @@ namespace DbServiceAcceptanceTest.Dtos
     public class ProductBase : BaseEntity
     {
         public string ProductName { get; set; } = default!;
-        public string ProductDescription { get; set;} = default!;
+        public string ProductDescription { get; set; } = default!;
     }
 
     public class Product : ProductBase
