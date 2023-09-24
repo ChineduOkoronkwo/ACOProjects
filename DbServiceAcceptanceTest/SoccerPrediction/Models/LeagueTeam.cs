@@ -7,8 +7,9 @@ namespace DbServiceAcceptanceTest.SoccerPrediction.Models
 {
     public class LeagueTeam : EntityId
     {
-        public Team Team { get; set; } = default!;
-        public League League { get; set; } = default!;
+        public Country Country { get; set; } = default!;
         public Season Season { get; set; } = default!;
+        public League League { get; set; } = default!;
+        public Team Team { get; set; } = default!;
     }
 }

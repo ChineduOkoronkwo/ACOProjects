@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace DbServiceAcceptanceTest.SoccerPrediction.Models
 {
     public class Country : BaseEntity
     {
-        public string ShortCode { get; set; } = default!;
+        public Region Region { get; set; } = default!;
     }
 }

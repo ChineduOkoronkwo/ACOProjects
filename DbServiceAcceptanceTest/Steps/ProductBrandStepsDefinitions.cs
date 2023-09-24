@@ -8,15 +8,14 @@ using TechTalk.SpecFlow;
 namespace DbServiceAcceptanceTest.Steps
 {
     [Binding]
-    public class DbServiceStepsDefinitions
+    public class ProductBrandStepsDefinitions
     {
-        private const string ConnectionString = "Server=localhost; Port=5432; User Id=testuser; Password=secret; Database=ProductDB";
-        private const int Zero = 0;
+        private const string ConnectionString = "Server=localhost; Port=5432; User Id=testuser; Password=secret; Database=product";
         private readonly ScenarioContext _scenarioContext;
         private readonly IDbService _dbService;
         private readonly IQueryService _queryService;
 
-        public DbServiceStepsDefinitions(ScenarioContext scenarioContext)
+        public ProductBrandStepsDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
             var connFactory = new NpgsqlConnectionFactory();
@@ -28,7 +27,7 @@ namespace DbServiceAcceptanceTest.Steps
         [Given("the following ProductBrand")]
         public async Task GivenTheProductBrand(Table table)
         {
-            var sqlCommand = "INSERT INTO product_brands(id, name) Values(@id, @name)";
+            var sqlCommand = "INSERT INTO ProductBrand(id, name) Values(@id, @name)";
             var productBrands = GetProductBrandsFromSpecFlowTable(table);
             foreach (var brand in productBrands)
             {
@@ -43,7 +42,7 @@ namespace DbServiceAcceptanceTest.Steps
         [When("I call ListAsync to fetch all ProductBrands")]
         public async Task WhenICallListAsyncToFetchAllBrand()
         {
-            var sqlCommand = "SELECT * FROM product_brands;";
+            var sqlCommand = "SELECT * FROM ProductBrand;";
             var result = await _dbService.ListAsync<ProductBrand>(sqlCommand, null);
             _scenarioContext["ListAsyncResult"] = result;
         }
@@ -52,7 +51,7 @@ namespace DbServiceAcceptanceTest.Steps
         public async Task WhenICallGetAsync(string id)
         {
             var getAsyncParam = new BaseEntity { Id = Guid.Parse(id) };
-            var sqlCommand = "SELECT * FROM product_brands WHERE id = @id;";
+            var sqlCommand = "SELECT * FROM ProductBrand WHERE id = @id;";
             var result = await _dbService.GetAsync<ProductBrand>(sqlCommand, getAsyncParam);
             _scenarioContext["GetAsyncResult"] = result;
         }
@@ -61,7 +60,7 @@ namespace DbServiceAcceptanceTest.Steps
         public async Task WhenICallUpdateAsync(string id, string name)
         {
             var productBrand = GetProductBrand(id, name);
-            var sqlCommand = "Update product_brands SET name = @name WHERE id = @id;";
+            var sqlCommand = "Update ProductBrand SET name = @name WHERE id = @id;";
             var result = await _dbService.UpdateAsync(sqlCommand, productBrand);
             result.Should().Be(1);
         }
@@ -70,7 +69,7 @@ namespace DbServiceAcceptanceTest.Steps
         public async Task WhenICallDeleteAsync(string id)
         {
             var param = new BaseEntity { Id = Guid.Parse(id) };
-            var sqlCommand = "DELETE FROM product_brands WHERE id = @id;";
+            var sqlCommand = "DELETE FROM ProductBrand WHERE id = @id;";
             var result = await _dbService.DeleteAsync(sqlCommand, param);
             result.Should().Be(1);
         }
@@ -116,7 +115,7 @@ namespace DbServiceAcceptanceTest.Steps
 
         public async Task CleanUp()
         {
-            await _queryService.ExecuteAsync("TRUNCATE TABLE product_brands", null);
+            await _queryService.ExecuteAsync("TRUNCATE TABLE ProductBrand CASCADE", null);
         }
 
         private IEnumerable<ProductBrand> GetProductBrandsFromSpecFlowTable(Table table)

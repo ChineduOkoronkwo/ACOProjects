@@ -6,17 +6,18 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.12.0"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2"/>
-    <PackageReference Include="NUnit" Version="3.13.3"/>
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1"/>
-    <PackageReference Include="NUnit.Analyzers" Version="3.3.0"/>
-    <PackageReference Include="coverlet.collector" Version="3.1.2"/>
-    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74"/>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118"/>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataService\DataService.csproj"/>
-    <ProjectReference Include="..\DbConnectionFactory\DbConnectionFactory.csproj"/>
+    <ProjectReference Include="..\DataService\DataService.csproj" />
+    <ProjectReference Include="..\DbConnectionFactory\DbConnectionFactory.csproj" />
   </ItemGroup>
 </Project>

@@ -17,28 +17,23 @@ namespace DbServiceAcceptanceTest.SoccerPrediction.Models
     public class FixtureResult : EntityId
     {
         public Fixture Fixture { get; set; } = default!;
-        public int HomeTeamScore { get; set; }
-        public int AwayTeamScore { get; set; }
+        public int HomeLeagueTeamScore { get; set; }
+        public int AwayLeagueTeamScore { get; set; }
         public MatchResult MatchResult
         {
             get
             {
-                if (HomeTeamScore == -1)
+                switch (HomeLeagueTeamScore.CompareTo(AwayLeagueTeamScore))
                 {
-                    return MatchResult.Unknown;
+                    case -1:
+                        return MatchResult.AwayWin;
+                    case 0:
+                        return MatchResult.Draw;
+                    case 1:
+                        return MatchResult.HomeWin;
+                    default:
+                        throw new InvalidOperationException("Invalid match result");
                 }
-
-                if (HomeTeamScore == AwayTeamScore)
-                {
-                    return MatchResult.Draw;
-                }
-
-                if (HomeTeamScore > AwayTeamScore)
-                {
-                    return MatchResult.HomeWin;
-                }
-
-                return MatchResult.AwayWin;
             }
         }
     }
