@@ -1,7 +1,7 @@
 using DataService.Interfaces;
 using DataService.Services;
 using DbConnectionFactory;
-using DbServiceAcceptanceTest.Dtos;
+using DbServiceAcceptanceTest.Products.Models;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 

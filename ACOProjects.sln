@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService.Tests", "DataSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbServiceAcceptanceTest", "DbServiceAcceptanceTest\DbServiceAcceptanceTest.csproj", "{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerFixture", "SoccerFixture\SoccerFixture.csproj", "{CD6BED0C-9B92-40A7-9069-250D42D563E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8DA313B-B197-43B4-BE59-535C3ACFB0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD6BED0C-9B92-40A7-9069-250D42D563E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD6BED0C-9B92-40A7-9069-250D42D563E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD6BED0C-9B92-40A7-9069-250D42D563E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD6BED0C-9B92-40A7-9069-250D42D563E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
